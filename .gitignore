@@ -40,7 +40,8 @@ next-env.d.ts
 
 .env
 
-/media
+/media/*
+!/media/seedImages/
 
 # Playwright
 node_modules/

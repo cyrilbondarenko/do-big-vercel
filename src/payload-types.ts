@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    games: Game;
+    emails: Email;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,15 +79,21 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    games: GamesSelect<false> | GamesSelect<true>;
+    emails: EmailsSelect<false> | EmailsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    landingPage: LandingPage;
+  };
+  globalsSelect: {
+    landingPage: LandingPageSelect<false> | LandingPageSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -118,7 +126,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -142,7 +150,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -158,23 +166,93 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "games".
+ */
+export interface Game {
+  id: number;
+  /**
+   * Lorem ipsum
+   */
+  title: string;
+  /**
+   * Lorem ipsum
+   */
+  description?: string | null;
+  /**
+   * Lorem ipsum
+   */
+  visits: number;
+  /**
+   * Lorem ipsum
+   */
+  players: number;
+  /**
+   * Lorem ipsum
+   */
+  href: string;
+  /**
+   * Lorem ipsum
+   */
+  image: number | Media;
+  /**
+   * Lorem ipsum
+   */
+  place?: string | null;
+  /**
+   * This will replace these values with the latest data from Roblox's API
+   */
+  latestData?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "emails".
+ */
+export interface Email {
+  id: number;
+  /**
+   * Lorem ipsum
+   */
+  type: string;
+  /**
+   * Lorem ipsum
+   */
+  email?: string | null;
+  /**
+   * Lorem ipsum
+   */
+  message: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'games';
+        value: number | Game;
+      } | null)
+    | ({
+        relationTo: 'emails';
+        value: number | Email;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -184,10 +262,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -207,7 +285,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -255,6 +333,33 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "games_select".
+ */
+export interface GamesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  visits?: T;
+  players?: T;
+  href?: T;
+  image?: T;
+  place?: T;
+  latestData?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "emails_select".
+ */
+export interface EmailsSelect<T extends boolean = true> {
+  type?: T;
+  email?: T;
+  message?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -284,6 +389,244 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landingPage".
+ */
+export interface LandingPage {
+  id: number;
+  hero: {
+    /**
+     * Lorem ipsum
+     */
+    title: string;
+    /**
+     * Lorem ipsum
+     */
+    subtitle: string;
+    /**
+     * Lorem ipsum
+     */
+    sessions: string;
+    /**
+     * Lorem ipsum
+     */
+    players: string;
+  };
+  portfolio: {
+    /**
+     * Lorem ipsum
+     */
+    title: string;
+    /**
+     * Lorem ipsum
+     */
+    items?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          href: string;
+          /**
+           * Lorem ipsum
+           */
+          image: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  hits: {
+    /**
+     * Lorem ipsum
+     */
+    title: string;
+  };
+  cases: {
+    /**
+     * Lorem ipsum
+     */
+    title: string;
+  };
+  buyout: {
+    /**
+     * Lorem ipsum
+     */
+    title: string;
+    /**
+     * Lorem ipsum
+     */
+    items?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          name: string;
+          /**
+           * Lorem ipsum
+           */
+          description: string;
+          /**
+           * Lorem ipsum
+           */
+          icon: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  blog: {
+    /**
+     * Lorem ipsum
+     */
+    title: string;
+    /**
+     * Lorem ipsum
+     */
+    items?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          name: string;
+          /**
+           * Lorem ipsum
+           */
+          description: string;
+          /**
+           * Lorem ipsum
+           */
+          href: string;
+          /**
+           * Lorem ipsum
+           */
+          image: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  ticker?: {
+    /**
+     * Lorem ipsum
+     */
+    items?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          text: string;
+          /**
+           * Lorem ipsum
+           */
+          icon: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  contacts: {
+    /**
+     * Lorem ipsum
+     */
+    title: string;
+    /**
+     * Lorem ipsum
+     */
+    email: string;
+    /**
+     * Lorem ipsum
+     */
+    text: string;
+    /**
+     * Lorem ipsum
+     */
+    buttonText: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landingPage_select".
+ */
+export interface LandingPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        sessions?: T;
+        players?: T;
+      };
+  portfolio?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              href?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  hits?:
+    | T
+    | {
+        title?: T;
+      };
+  cases?:
+    | T
+    | {
+        title?: T;
+      };
+  buyout?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              name?: T;
+              description?: T;
+              icon?: T;
+              id?: T;
+            };
+      };
+  blog?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              name?: T;
+              description?: T;
+              href?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  ticker?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              text?: T;
+              icon?: T;
+              id?: T;
+            };
+      };
+  contacts?:
+    | T
+    | {
+        title?: T;
+        email?: T;
+        text?: T;
+        buttonText?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
