@@ -413,6 +413,14 @@ export interface LandingPage {
      * Lorem ipsum
      */
     players: string;
+    /**
+     * Lorem ipsum
+     */
+    hours: string;
+    /**
+     * Lorem ipsum
+     */
+    backgroundVideo?: (number | null) | Media;
   };
   portfolio: {
     /**
@@ -555,6 +563,8 @@ export interface LandingPageSelect<T extends boolean = true> {
         subtitle?: T;
         sessions?: T;
         players?: T;
+        hours?: T;
+        backgroundVideo?: T;
       };
   portfolio?:
     | T

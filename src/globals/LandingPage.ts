@@ -41,6 +41,22 @@ export const LandingPage: GlobalConfig = {
                         description: "Lorem ipsum"
                     }
                 },
+                {
+                    name: "hours",
+                    type: "text",
+                    required: true,
+                    admin: {
+                        description: "Lorem ipsum"
+                    }
+                },
+                {
+                    name: "backgroundVideo",
+                    type: "upload",
+                    relationTo: "media",
+                    admin: {
+                        description: "Lorem ipsum"
+                    }
+                },
             ],
         },
         // Portfolio section
