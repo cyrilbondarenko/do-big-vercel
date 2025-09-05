@@ -90,9 +90,11 @@ export interface Config {
   };
   globals: {
     landingPage: LandingPage;
+    gamesPage: GamesPage;
   };
   globalsSelect: {
     landingPage: LandingPageSelect<false> | LandingPageSelect<true>;
+    gamesPage: GamesPageSelect<false> | GamesPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -218,7 +220,7 @@ export interface Email {
   /**
    * Lorem ipsum
    */
-  email?: string | null;
+  email: string;
   /**
    * Lorem ipsum
    */
@@ -553,6 +555,21 @@ export interface LandingPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gamesPage".
+ */
+export interface GamesPage {
+  id: number;
+  hero?: {
+    /**
+     * Lorem ipsum
+     */
+    background?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "landingPage_select".
  */
 export interface LandingPageSelect<T extends boolean = true> {
@@ -633,6 +650,20 @@ export interface LandingPageSelect<T extends boolean = true> {
         email?: T;
         text?: T;
         buttonText?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gamesPage_select".
+ */
+export interface GamesPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        background?: T;
       };
   updatedAt?: T;
   createdAt?: T;

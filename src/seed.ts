@@ -56,19 +56,6 @@ const seed = async () => {
       })
     }
 
-    const media = await payload.find({
-      collection: 'media',
-      limit: 1000,
-    })
-    for (const item of media.docs) {
-      await payload.delete({
-        collection: 'media',
-        id: item.id,
-      })
-    }
-
-    const heroVideo = await uploadImageFile(payload, 'hero-bg.mp4', 'Hero Video')
-
     await payload.updateGlobal({
       slug: 'landingPage',
       data: {
@@ -78,7 +65,6 @@ const seed = async () => {
           sessions: '24B+',
           players: '1B+',
           hours: '1B+',
-          backgroundVideo: heroVideo!.id,
         },
         portfolio: {
           title: "We've helped scale",
@@ -106,6 +92,31 @@ const seed = async () => {
           email: 'info@dobigstudios.com',
           text: 'or write your message here',
           buttonText: 'Message Us',
+        },
+      },
+    })
+
+    const media = await payload.find({
+      collection: 'media',
+      limit: 1000,
+    })
+    for (const item of media.docs) {
+      await payload.delete({
+        collection: 'media',
+        id: item.id,
+      })
+    }
+
+    const gamesPageBackground = await uploadImageFile(
+      payload,
+      'gamesPageBackground.png',
+      'Background',
+    )
+    await payload.updateGlobal({
+      slug: 'gamesPage',
+      data: {
+        hero: {
+          background: gamesPageBackground!.id,
         },
       },
     })
@@ -662,9 +673,13 @@ const seed = async () => {
       })
     }
 
+    const heroVideo = await uploadImageFile(payload, 'hero-bg.mp4', 'Hero Video')
     await payload.updateGlobal({
       slug: 'landingPage',
       data: {
+        hero: {
+          backgroundVideo: heroVideo!.id,
+        },
         portfolio: {
           items: [
             { href: 'https://www.google.com', image: portfolioMedia[0].id },

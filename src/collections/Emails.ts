@@ -15,6 +15,7 @@ export const Emails: CollectionConfig = {
         {
             name: "email",
             type: "email",
+            required: true,
             admin: {
                 description: "Lorem ipsum"
             }
@@ -40,5 +41,8 @@ export const Emails: CollectionConfig = {
                 }
             },
         ],
+    },
+    access: {
+        create: () => true,
     },
 }

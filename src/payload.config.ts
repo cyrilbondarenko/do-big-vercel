@@ -12,6 +12,8 @@ import {Games} from "./collections/Games";
 import {Emails} from "./collections/Emails";
 import {LandingPage} from "./globals/LandingPage";
 import {vercelBlobStorage} from "@payloadcms/storage-vercel-blob";
+import { GamesPage } from '@/globals/GamesPage'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,7 +27,7 @@ export default buildConfig({
     },
     collections: [Users, Media, Games, Emails],
     globals: [
-        LandingPage
+        LandingPage, GamesPage
     ],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || '',
@@ -48,4 +50,16 @@ export default buildConfig({
             token: process.env.BLOB_READ_WRITE_TOKEN,
         }),
     ],
+    email: nodemailerAdapter({
+        defaultFromAddress: 'morris58@ethereal.email',
+        defaultFromName: 'Payload',
+        transportOptions: {
+            host: process.env.SMTP_HOST,
+            port: 587,
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        },
+    }),
 })
