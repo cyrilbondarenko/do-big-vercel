@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     games: Game;
     emails: Email;
+    teamMembers: TeamMember;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -81,6 +82,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     games: GamesSelect<false> | GamesSelect<true>;
     emails: EmailsSelect<false> | EmailsSelect<true>;
+    teamMembers: TeamMembersSelect<false> | TeamMembersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -91,10 +93,12 @@ export interface Config {
   globals: {
     landingPage: LandingPage;
     gamesPage: GamesPage;
+    aboutPage: AboutPage;
   };
   globalsSelect: {
     landingPage: LandingPageSelect<false> | LandingPageSelect<true>;
     gamesPage: GamesPageSelect<false> | GamesPageSelect<true>;
+    aboutPage: AboutPageSelect<false> | AboutPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -230,6 +234,31 @@ export interface Email {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teamMembers".
+ */
+export interface TeamMember {
+  id: number;
+  /**
+   * Lorem ipsum
+   */
+  photo: number | Media;
+  /**
+   * Lorem ipsum
+   */
+  name: string;
+  /**
+   * Lorem ipsum
+   */
+  position: string;
+  /**
+   * Lorem ipsum
+   */
+  linkedIn?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -250,6 +279,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'emails';
         value: number | Email;
+      } | null)
+    | ({
+        relationTo: 'teamMembers';
+        value: number | TeamMember;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -357,6 +390,18 @@ export interface EmailsSelect<T extends boolean = true> {
   type?: T;
   email?: T;
   message?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teamMembers_select".
+ */
+export interface TeamMembersSelect<T extends boolean = true> {
+  photo?: T;
+  name?: T;
+  position?: T;
+  linkedIn?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -570,6 +615,117 @@ export interface GamesPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "aboutPage".
+ */
+export interface AboutPage {
+  id: number;
+  hero?: {
+    /**
+     * Lorem ipsum
+     */
+    background?: (number | null) | Media;
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    yearsValue?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    yearsText?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    membersValue?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    membersText?: string | null;
+  };
+  story?: {
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    subtitle?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    text?: string | null;
+  };
+  mission?: {
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    subtitle?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    text?: string | null;
+  };
+  values?: {
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    items?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          name?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          description?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          icon?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  investors?: {
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    items?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          href?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "landingPage_select".
  */
 export interface LandingPageSelect<T extends boolean = true> {
@@ -664,6 +820,64 @@ export interface GamesPageSelect<T extends boolean = true> {
     | T
     | {
         background?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "aboutPage_select".
+ */
+export interface AboutPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        background?: T;
+        title?: T;
+        yearsValue?: T;
+        yearsText?: T;
+        membersValue?: T;
+        membersText?: T;
+      };
+  story?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        text?: T;
+      };
+  mission?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        text?: T;
+      };
+  values?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              name?: T;
+              description?: T;
+              icon?: T;
+              id?: T;
+            };
+      };
+  investors?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              href?: T;
+              image?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

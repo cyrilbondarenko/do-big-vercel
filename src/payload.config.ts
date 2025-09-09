@@ -14,6 +14,8 @@ import {LandingPage} from "./globals/LandingPage";
 import {vercelBlobStorage} from "@payloadcms/storage-vercel-blob";
 import { GamesPage } from '@/globals/GamesPage'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { TeamMembers } from '@/collections/Team'
+import { AboutPage } from '@/globals/AboutPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,9 +27,9 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
     },
-    collections: [Users, Media, Games, Emails],
+    collections: [Users, Media, Games, Emails, TeamMembers],
     globals: [
-        LandingPage, GamesPage
+        LandingPage, GamesPage, AboutPage
     ],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || '',

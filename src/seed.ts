@@ -45,16 +45,10 @@ const seed = async () => {
   const payload = await getPayload({ config })
 
   try {
-    const games = await payload.find({
+    await payload.delete({
       collection: 'games',
-      limit: 1000,
+      where: {},
     })
-    for (const game of games.docs) {
-      await payload.delete({
-        collection: 'games',
-        id: game.id,
-      })
-    }
 
     await payload.updateGlobal({
       slug: 'landingPage',
@@ -96,16 +90,10 @@ const seed = async () => {
       },
     })
 
-    const media = await payload.find({
+    await payload.delete({
       collection: 'media',
-      limit: 1000,
+      where: {},
     })
-    for (const item of media.docs) {
-      await payload.delete({
-        collection: 'media',
-        id: item.id,
-      })
-    }
 
     const gamesPageBackground = await uploadImageFile(
       payload,
