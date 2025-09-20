@@ -7,8 +7,7 @@ export const Games: CollectionConfig = {
             name: "title",
             type: "text",
             label: "Default Title",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },
@@ -23,8 +22,7 @@ export const Games: CollectionConfig = {
             name: "visits",
             type: "number",
             label: "Estimated visits",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },
@@ -32,16 +30,14 @@ export const Games: CollectionConfig = {
             name: "players",
             type: "number",
             label: "Estimated players",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },
         {
             name: "href",
             type: "text",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },
@@ -50,8 +46,7 @@ export const Games: CollectionConfig = {
             label: "Estimated image",
             type: "upload",
             relationTo: "media",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },

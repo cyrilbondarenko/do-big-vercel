@@ -1,7 +1,7 @@
 import { GlobalConfig } from 'payload'
 
-export const AboutPage: GlobalConfig = {
-  slug: 'aboutPage',
+export const CareersPage: GlobalConfig = {
+  slug: 'careersPage',
   fields: [
     // Header section
     {
@@ -53,36 +53,21 @@ export const AboutPage: GlobalConfig = {
                 description: 'Lorem ipsum',
               },
             },
-          ]
+          ],
         },
       ],
     },
-    // Blocks
     {
-      name: "blocks",
-      type: "array",
+      name: 'creators',
+      type: 'group',
       fields: [
-        {
-          name: 'image',
-          type: 'upload',
-          relationTo: 'media',
-          admin: {
-            description: 'Lorem ipsum',
-          },
-        },
         {
           name: 'title',
           type: 'group',
-          admin: {
-            description: 'Lorem ipsum',
-          },
           fields: [
             {
               name: 'text',
               type: 'text',
-              admin: {
-                description: 'Lorem ipsum',
-              },
             },
             {
               name: 'icon',
@@ -92,32 +77,39 @@ export const AboutPage: GlobalConfig = {
                 description: 'Lorem ipsum',
               },
             },
-          ]
+          ],
         },
         {
           name: 'subtitle',
           type: 'text',
+        },
+        {
+          name: 'text',
+          type: 'text',
+        },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          admin: {
+            description: 'Lorem ipsum',
+          },
+        },
+      ],
+    },
+    {
+      name: 'benefits',
+      type: 'group',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
           admin: {
             description: 'Lorem ipsum',
           },
         },
         {
-          name: 'description',
-          type: 'text',
-          admin: {
-            description: 'Lorem ipsum',
-          },
-        }
-      ]
-    },
-    // Values section
-    {
-      name: 'values',
-      type: 'group',
-      label: 'Values Section',
-      fields: [
-        {
-          name: 'title',
+          name: 'subtitle',
           type: 'text',
           admin: {
             description: 'Lorem ipsum',
@@ -156,40 +148,43 @@ export const AboutPage: GlobalConfig = {
         },
       ],
     },
-    // Investors section
     {
-      name: 'investors',
+      name: 'positions',
       type: 'group',
-      label: 'Investors Section',
       fields: [
         {
           name: 'title',
-          type: 'text',
-          admin: {
-            description: 'Lorem ipsum',
-          },
-        },
-        {
-          name: 'items',
-          type: 'array',
-          admin: {
-            description: 'Lorem ipsum',
-          },
+          type: 'group',
           fields: [
             {
-              name: 'href',
+              name: 'title',
               type: 'text',
-              admin: {
-                description: 'Lorem ipsum',
-              },
             },
             {
-              name: 'image',
+              name: 'icon',
               type: 'upload',
               relationTo: 'media',
               admin: {
                 description: 'Lorem ipsum',
               },
+            },
+          ],
+        },
+        {
+          name: 'positions',
+          type: 'array',
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+            },
+            {
+              name: 'employment',
+              type: 'text',
+            },
+            {
+              name: 'linkedIn',
+              type: 'text',
             },
           ],
         },

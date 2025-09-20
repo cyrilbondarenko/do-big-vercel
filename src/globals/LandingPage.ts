@@ -12,40 +12,35 @@ export const LandingPage: GlobalConfig = {
                 {
                     name: "title",
                     type: "text",
-                    required: true,
-                    admin: {
+                                  admin: {
                         description: "Lorem ipsum"
                     }
                 },
                 {
                     name: "subtitle",
                     type: "text",
-                    required: true,
-                    admin: {
+                                  admin: {
                         description: "Lorem ipsum"
                     }
                 },
                 {
                     name: "sessions",
                     type: "text",
-                    required: true,
-                    admin: {
+                                  admin: {
                         description: "Lorem ipsum"
                     }
                 },
                 {
                     name: "players",
                     type: "text",
-                    required: true,
-                    admin: {
+                                  admin: {
                         description: "Lorem ipsum"
                     }
                 },
                 {
                     name: "hours",
                     type: "text",
-                    required: true,
-                    admin: {
+                                  admin: {
                         description: "Lorem ipsum"
                     }
                 },
@@ -68,8 +63,7 @@ export const LandingPage: GlobalConfig = {
                 {
                     name: "title",
                     type: "text",
-                    required: true,
-                    admin: {
+                                  admin: {
                         description: "Lorem ipsum"
                     }
                 },
@@ -83,8 +77,7 @@ export const LandingPage: GlobalConfig = {
                         {
                             name: "href",
                             type: "text",
-                            required: true,
-                            admin: {
+                                                  admin: {
                                 description: "Lorem ipsum"
                             }
                         },
@@ -92,8 +85,7 @@ export const LandingPage: GlobalConfig = {
                             name: "image",
                             type: "upload",
                             relationTo: "media",
-                            required: true,
-                            admin: {
+                                                  admin: {
                                 description: "Lorem ipsum"
                             }
                         },
@@ -110,8 +102,7 @@ export const LandingPage: GlobalConfig = {
                 {
                     name: "title",
                     type: "text",
-                    required: true,
-                    admin: {
+                                  admin: {
                         description: "Lorem ipsum"
                     }
                 },
@@ -126,8 +117,7 @@ export const LandingPage: GlobalConfig = {
                 {
                     name: "title",
                     type: "text",
-                    required: true,
-                    admin: {
+                                  admin: {
                         description: "Lorem ipsum"
                     }
                 },
@@ -142,8 +132,7 @@ export const LandingPage: GlobalConfig = {
                 {
                     name: "title",
                     type: "text",
-                    required: true,
-                    admin: {
+                                  admin: {
                         description: "Lorem ipsum"
                     }
                 },
@@ -157,16 +146,14 @@ export const LandingPage: GlobalConfig = {
                         {
                             name: "name",
                             type: "text",
-                            required: true,
-                            admin: {
+                                                  admin: {
                                 description: "Lorem ipsum"
                             }
                         },
                         {
                             name: "description",
                             type: "text",
-                            required: true,
-                            admin: {
+                                                  admin: {
                                 description: "Lorem ipsum"
                             }
                         },
@@ -174,144 +161,11 @@ export const LandingPage: GlobalConfig = {
                             name: "icon",
                             type: "upload",
                             relationTo: "media",
-                            required: true,
-                            admin: {
+                                                  admin: {
                                 description: "Lorem ipsum"
                             }
                         },
                     ],
-                },
-            ],
-        },
-        // Blog section
-        {
-            name: "blog",
-            type: "group",
-            label: "Blog Section",
-            fields: [
-                {
-                    name: "title",
-                    type: "text",
-                    required: true,
-                    admin: {
-                        description: "Lorem ipsum"
-                    }
-                },
-                {
-                    name: "items",
-                    type: "array",
-                    admin: {
-                        description: "Lorem ipsum"
-                    },
-                    fields: [
-                        {
-                            name: "name",
-                            type: "text",
-                            required: true,
-                            admin: {
-                                description: "Lorem ipsum"
-                            }
-                        },
-                        {
-                            name: "description",
-                            type: "text",
-                            required: true,
-                            admin: {
-                                description: "Lorem ipsum"
-                            }
-                        },
-                        {
-                            name: "href",
-                            type: "text",
-                            required: true,
-                            admin: {
-                                description: "Lorem ipsum"
-                            }
-                        },
-                        {
-                            name: "image",
-                            type: "upload",
-                            relationTo: "media",
-                            required: true,
-                            admin: {
-                                description: "Lorem ipsum"
-                            }
-                        },
-                    ],
-                },
-            ],
-        },
-        // Ticker section
-        {
-            name: "ticker",
-            type: "group",
-            label: "Ticker Section",
-            fields: [
-                {
-                    name: "items",
-                    type: "array",
-                    admin: {
-                        description: "Lorem ipsum"
-                    },
-                    fields: [
-                        {
-                            name: "text",
-                            type: "text",
-                            required: true,
-                            admin: {
-                                description: "Lorem ipsum"
-                            }
-                        },
-                        {
-                            name: "icon",
-                            type: "upload",
-                            relationTo: "media",
-                            required: true,
-                            admin: {
-                                description: "Lorem ipsum"
-                            }
-                        },
-                    ],
-                },
-            ],
-        },
-        // Contacts section
-        {
-            name: "contacts",
-            type: "group",
-            label: "Contacts Section",
-            fields: [
-                {
-                    name: "title",
-                    type: "text",
-                    required: true,
-                    admin: {
-                        description: "Lorem ipsum"
-                    }
-                },
-                {
-                    name: "email",
-                    type: "text",
-                    required: true,
-                    admin: {
-                        description: "Lorem ipsum"
-                    }
-                },
-                {
-                    name: "text",
-                    type: "text",
-                    required: true,
-                    admin: {
-                        description: "Lorem ipsum"
-                    }
-                },
-                {
-                    name: "buttonText",
-                    type: "text",
-                    required: true,
-                    admin: {
-                        description: "Lorem ipsum"
-                    }
                 },
             ],
         },

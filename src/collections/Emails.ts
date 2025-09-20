@@ -7,24 +7,21 @@ export const Emails: CollectionConfig = {
             name: "type",
             type: "text",
             label: "Type",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },
         {
             name: "email",
             type: "email",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },
         {
             name: "message",
             type: "text",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },
@@ -34,7 +31,7 @@ export const Emails: CollectionConfig = {
             async ({ doc, req, operation }) => {
                 if (operation === 'create') {
                     await req.payload.sendEmail({
-                        to: 'you@mywebsite.com',
+                        to: process.env.SEND_EMAIL_TO,
                         subject: 'New Contact Form Submission',
                         text: `Type: ${doc.type}\nEmail: ${doc.email}\nMessage: ${doc.message}`,
                     });

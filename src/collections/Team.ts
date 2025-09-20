@@ -8,8 +8,7 @@ export const TeamMembers: CollectionConfig = {
             label: "Photo",
             type: "upload",
             relationTo: "media",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },
@@ -17,8 +16,7 @@ export const TeamMembers: CollectionConfig = {
             name: "name",
             type: "text",
             label: "Default Name",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },
@@ -26,8 +24,7 @@ export const TeamMembers: CollectionConfig = {
             name: "position",
             type: "text",
             label: "Default Position",
-            required: true,
-            admin: {
+                  admin: {
                 description: "Lorem ipsum"
             }
         },

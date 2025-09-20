@@ -72,6 +72,7 @@ export interface Config {
     games: Game;
     emails: Email;
     teamMembers: TeamMember;
+    news: News;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,6 +84,7 @@ export interface Config {
     games: GamesSelect<false> | GamesSelect<true>;
     emails: EmailsSelect<false> | EmailsSelect<true>;
     teamMembers: TeamMembersSelect<false> | TeamMembersSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -94,11 +96,21 @@ export interface Config {
     landingPage: LandingPage;
     gamesPage: GamesPage;
     aboutPage: AboutPage;
+    careersPage: CareersPage;
+    mediaPage: MediaPage;
+    casesPage: CasesPage;
+    contactSection: ContactSection;
+    contactPage: ContactPage;
   };
   globalsSelect: {
     landingPage: LandingPageSelect<false> | LandingPageSelect<true>;
     gamesPage: GamesPageSelect<false> | GamesPageSelect<true>;
     aboutPage: AboutPageSelect<false> | AboutPageSelect<true>;
+    careersPage: CareersPageSelect<false> | CareersPageSelect<true>;
+    mediaPage: MediaPageSelect<false> | MediaPageSelect<true>;
+    casesPage: CasesPageSelect<false> | CasesPageSelect<true>;
+    contactSection: ContactSectionSelect<false> | ContactSectionSelect<true>;
+    contactPage: ContactPageSelect<false> | ContactPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -157,7 +169,7 @@ export interface User {
  */
 export interface Media {
   id: number;
-  alt: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -179,7 +191,7 @@ export interface Game {
   /**
    * Lorem ipsum
    */
-  title: string;
+  title?: string | null;
   /**
    * Lorem ipsum
    */
@@ -187,19 +199,19 @@ export interface Game {
   /**
    * Lorem ipsum
    */
-  visits: number;
+  visits?: number | null;
   /**
    * Lorem ipsum
    */
-  players: number;
+  players?: number | null;
   /**
    * Lorem ipsum
    */
-  href: string;
+  href?: string | null;
   /**
    * Lorem ipsum
    */
-  image: number | Media;
+  image?: (number | null) | Media;
   /**
    * Lorem ipsum
    */
@@ -220,15 +232,15 @@ export interface Email {
   /**
    * Lorem ipsum
    */
-  type: string;
+  type?: string | null;
   /**
    * Lorem ipsum
    */
-  email: string;
+  email?: string | null;
   /**
    * Lorem ipsum
    */
-  message: string;
+  message?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -241,19 +253,62 @@ export interface TeamMember {
   /**
    * Lorem ipsum
    */
-  photo: number | Media;
+  photo?: (number | null) | Media;
   /**
    * Lorem ipsum
    */
-  name: string;
+  name?: string | null;
   /**
    * Lorem ipsum
    */
-  position: string;
+  position?: string | null;
   /**
    * Lorem ipsum
    */
   linkedIn?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: number;
+  /**
+   * Lorem ipsum
+   */
+  name?: string | null;
+  /**
+   * Lorem ipsum
+   */
+  description?: string | null;
+  /**
+   * Lorem ipsum
+   */
+  text?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Lorem ipsum
+   */
+  date?: string | null;
+  /**
+   * Lorem ipsum
+   */
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -283,6 +338,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'teamMembers';
         value: number | TeamMember;
+      } | null)
+    | ({
+        relationTo: 'news';
+        value: number | News;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -407,6 +466,19 @@ export interface TeamMembersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  text?: T;
+  date?: T;
+  image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -443,71 +515,37 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface LandingPage {
   id: number;
-  hero: {
+  hero?: {
     /**
      * Lorem ipsum
      */
-    title: string;
+    title?: string | null;
     /**
      * Lorem ipsum
      */
-    subtitle: string;
+    subtitle?: string | null;
     /**
      * Lorem ipsum
      */
-    sessions: string;
+    sessions?: string | null;
     /**
      * Lorem ipsum
      */
-    players: string;
+    players?: string | null;
     /**
      * Lorem ipsum
      */
-    hours: string;
+    hours?: string | null;
     /**
      * Lorem ipsum
      */
     backgroundVideo?: (number | null) | Media;
   };
-  portfolio: {
+  portfolio?: {
     /**
      * Lorem ipsum
      */
-    title: string;
-    /**
-     * Lorem ipsum
-     */
-    items?:
-      | {
-          /**
-           * Lorem ipsum
-           */
-          href: string;
-          /**
-           * Lorem ipsum
-           */
-          image: number | Media;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  hits: {
-    /**
-     * Lorem ipsum
-     */
-    title: string;
-  };
-  cases: {
-    /**
-     * Lorem ipsum
-     */
-    title: string;
-  };
-  buyout: {
-    /**
-     * Lorem ipsum
-     */
-    title: string;
+    title?: string | null;
     /**
      * Lorem ipsum
      */
@@ -516,24 +554,32 @@ export interface LandingPage {
           /**
            * Lorem ipsum
            */
-          name: string;
+          href?: string | null;
           /**
            * Lorem ipsum
            */
-          description: string;
-          /**
-           * Lorem ipsum
-           */
-          icon: number | Media;
+          image?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
   };
-  blog: {
+  hits?: {
     /**
      * Lorem ipsum
      */
-    title: string;
+    title?: string | null;
+  };
+  cases?: {
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+  };
+  buyout?: {
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
     /**
      * Lorem ipsum
      */
@@ -542,58 +588,18 @@ export interface LandingPage {
           /**
            * Lorem ipsum
            */
-          name: string;
+          name?: string | null;
           /**
            * Lorem ipsum
            */
-          description: string;
+          description?: string | null;
           /**
            * Lorem ipsum
            */
-          href: string;
-          /**
-           * Lorem ipsum
-           */
-          image: number | Media;
+          icon?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
-  };
-  ticker?: {
-    /**
-     * Lorem ipsum
-     */
-    items?:
-      | {
-          /**
-           * Lorem ipsum
-           */
-          text: string;
-          /**
-           * Lorem ipsum
-           */
-          icon: number | Media;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  contacts: {
-    /**
-     * Lorem ipsum
-     */
-    title: string;
-    /**
-     * Lorem ipsum
-     */
-    email: string;
-    /**
-     * Lorem ipsum
-     */
-    text: string;
-    /**
-     * Lorem ipsum
-     */
-    buttonText: string;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -631,48 +637,54 @@ export interface AboutPage {
     /**
      * Lorem ipsum
      */
-    yearsValue?: string | null;
-    /**
-     * Lorem ipsum
-     */
-    yearsText?: string | null;
-    /**
-     * Lorem ipsum
-     */
-    membersValue?: string | null;
-    /**
-     * Lorem ipsum
-     */
-    membersText?: string | null;
+    stats?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          icon?: (number | null) | Media;
+          /**
+           * Lorem ipsum
+           */
+          title?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          value?: string | null;
+          id?: string | null;
+        }[]
+      | null;
   };
-  story?: {
-    /**
-     * Lorem ipsum
-     */
-    title?: string | null;
-    /**
-     * Lorem ipsum
-     */
-    subtitle?: string | null;
-    /**
-     * Lorem ipsum
-     */
-    text?: string | null;
-  };
-  mission?: {
-    /**
-     * Lorem ipsum
-     */
-    title?: string | null;
-    /**
-     * Lorem ipsum
-     */
-    subtitle?: string | null;
-    /**
-     * Lorem ipsum
-     */
-    text?: string | null;
-  };
+  blocks?:
+    | {
+        /**
+         * Lorem ipsum
+         */
+        image?: (number | null) | Media;
+        /**
+         * Lorem ipsum
+         */
+        title?: {
+          /**
+           * Lorem ipsum
+           */
+          text?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          icon?: (number | null) | Media;
+        };
+        /**
+         * Lorem ipsum
+         */
+        subtitle?: string | null;
+        /**
+         * Lorem ipsum
+         */
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   values?: {
     /**
      * Lorem ipsum
@@ -717,6 +729,267 @@ export interface AboutPage {
            * Lorem ipsum
            */
           image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "careersPage".
+ */
+export interface CareersPage {
+  id: number;
+  hero?: {
+    /**
+     * Lorem ipsum
+     */
+    background?: (number | null) | Media;
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    stats?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          icon?: (number | null) | Media;
+          /**
+           * Lorem ipsum
+           */
+          title?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          value?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  creators?: {
+    title?: {
+      text?: string | null;
+      /**
+       * Lorem ipsum
+       */
+      icon?: (number | null) | Media;
+    };
+    subtitle?: string | null;
+    text?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    image?: (number | null) | Media;
+  };
+  benefits?: {
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    subtitle?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    items?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          name?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          description?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          icon?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  positions?: {
+    title?: {
+      title?: string | null;
+      /**
+       * Lorem ipsum
+       */
+      icon?: (number | null) | Media;
+    };
+    positions?:
+      | {
+          title?: string | null;
+          employment?: string | null;
+          linkedIn?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mediaPage".
+ */
+export interface MediaPage {
+  id: number;
+  hero?: {
+    /**
+     * Lorem ipsum
+     */
+    background?: (number | null) | Media;
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    stats?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          icon?: (number | null) | Media;
+          /**
+           * Lorem ipsum
+           */
+          title?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          value?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "casesPage".
+ */
+export interface CasesPage {
+  id: number;
+  hero?: {
+    /**
+     * Lorem ipsum
+     */
+    background?: (number | null) | Media;
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    stats?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          icon?: (number | null) | Media;
+          /**
+           * Lorem ipsum
+           */
+          title?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          value?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactSection".
+ */
+export interface ContactSection {
+  id: number;
+  ticker?: {
+    /**
+     * Lorem ipsum
+     */
+    items?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          text?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          icon?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Lorem ipsum
+   */
+  title?: string | null;
+  /**
+   * Lorem ipsum
+   */
+  email?: string | null;
+  /**
+   * Lorem ipsum
+   */
+  text?: string | null;
+  /**
+   * Lorem ipsum
+   */
+  buttonText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactPage".
+ */
+export interface ContactPage {
+  id: number;
+  hero?: {
+    /**
+     * Lorem ipsum
+     */
+    background?: (number | null) | Media;
+    /**
+     * Lorem ipsum
+     */
+    title?: string | null;
+    /**
+     * Lorem ipsum
+     */
+    stats?:
+      | {
+          /**
+           * Lorem ipsum
+           */
+          icon?: (number | null) | Media;
+          /**
+           * Lorem ipsum
+           */
+          title?: string | null;
+          /**
+           * Lorem ipsum
+           */
+          value?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -774,39 +1047,6 @@ export interface LandingPageSelect<T extends boolean = true> {
               id?: T;
             };
       };
-  blog?:
-    | T
-    | {
-        title?: T;
-        items?:
-          | T
-          | {
-              name?: T;
-              description?: T;
-              href?: T;
-              image?: T;
-              id?: T;
-            };
-      };
-  ticker?:
-    | T
-    | {
-        items?:
-          | T
-          | {
-              text?: T;
-              icon?: T;
-              id?: T;
-            };
-      };
-  contacts?:
-    | T
-    | {
-        title?: T;
-        email?: T;
-        text?: T;
-        buttonText?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -835,24 +1075,28 @@ export interface AboutPageSelect<T extends boolean = true> {
     | {
         background?: T;
         title?: T;
-        yearsValue?: T;
-        yearsText?: T;
-        membersValue?: T;
-        membersText?: T;
+        stats?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              value?: T;
+              id?: T;
+            };
       };
-  story?:
+  blocks?:
     | T
     | {
-        title?: T;
+        image?: T;
+        title?:
+          | T
+          | {
+              text?: T;
+              icon?: T;
+            };
         subtitle?: T;
-        text?: T;
-      };
-  mission?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        text?: T;
+        description?: T;
+        id?: T;
       };
   values?:
     | T
@@ -876,6 +1120,167 @@ export interface AboutPageSelect<T extends boolean = true> {
           | {
               href?: T;
               image?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "careersPage_select".
+ */
+export interface CareersPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        background?: T;
+        title?: T;
+        stats?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              value?: T;
+              id?: T;
+            };
+      };
+  creators?:
+    | T
+    | {
+        title?:
+          | T
+          | {
+              text?: T;
+              icon?: T;
+            };
+        subtitle?: T;
+        text?: T;
+        image?: T;
+      };
+  benefits?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              name?: T;
+              description?: T;
+              icon?: T;
+              id?: T;
+            };
+      };
+  positions?:
+    | T
+    | {
+        title?:
+          | T
+          | {
+              title?: T;
+              icon?: T;
+            };
+        positions?:
+          | T
+          | {
+              title?: T;
+              employment?: T;
+              linkedIn?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mediaPage_select".
+ */
+export interface MediaPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        background?: T;
+        title?: T;
+        stats?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              value?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "casesPage_select".
+ */
+export interface CasesPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        background?: T;
+        title?: T;
+        stats?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              value?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactSection_select".
+ */
+export interface ContactSectionSelect<T extends boolean = true> {
+  ticker?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              text?: T;
+              icon?: T;
+              id?: T;
+            };
+      };
+  title?: T;
+  email?: T;
+  text?: T;
+  buttonText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contactPage_select".
+ */
+export interface ContactPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        background?: T;
+        title?: T;
+        stats?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              value?: T;
               id?: T;
             };
       };
