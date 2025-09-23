@@ -9,6 +9,7 @@ type GlobalSlug =
   | 'careersPage'
   | 'mediaPage'
   | 'contactPage'
+  | 'globals'
 
 type CollectionSlug = 'games' | 'news' | 'teamMembers' | 'media'
 
@@ -22,6 +23,14 @@ export const clearGlobals = async (payload: BasePayload) => {
         hits: {},
         cases: {},
         buyout: { items: [] },
+      },
+    },
+    {
+      slug: 'globals',
+      data: {
+        logo: null,
+        logoDark: null,
+        copyright: '',
       },
     },
     {

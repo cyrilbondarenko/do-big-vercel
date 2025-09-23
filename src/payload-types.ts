@@ -93,6 +93,7 @@ export interface Config {
     defaultIDType: number;
   };
   globals: {
+    globals: Global;
     landingPage: LandingPage;
     gamesPage: GamesPage;
     aboutPage: AboutPage;
@@ -103,6 +104,7 @@ export interface Config {
     contactPage: ContactPage;
   };
   globalsSelect: {
+    globals: GlobalsSelect<false> | GlobalsSelect<true>;
     landingPage: LandingPageSelect<false> | LandingPageSelect<true>;
     gamesPage: GamesPageSelect<false> | GamesPageSelect<true>;
     aboutPage: AboutPageSelect<false> | AboutPageSelect<true>;
@@ -147,6 +149,9 @@ export interface User {
   id: number;
   updatedAt: string;
   createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -392,6 +397,9 @@ export interface PayloadMigration {
 export interface UsersSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
   email?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;
@@ -508,6 +516,27 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "globals".
+ */
+export interface Global {
+  id: number;
+  /**
+   * Lorem ipsum
+   */
+  logo?: (number | null) | Media;
+  /**
+   * Lorem ipsum
+   */
+  logoDark?: (number | null) | Media;
+  /**
+   * Lorem ipsum
+   */
+  copyright?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -996,6 +1025,18 @@ export interface ContactPage {
   };
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "globals_select".
+ */
+export interface GlobalsSelect<T extends boolean = true> {
+  logo?: T;
+  logoDark?: T;
+  copyright?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

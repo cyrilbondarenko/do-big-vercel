@@ -22,6 +22,7 @@ import { ContactSection } from '@/globals/ContactSection'
 import { News } from '@/collections/News'
 import { CasesPage } from '@/globals/CasesPage'
 import { ContactPage } from '@/globals/ContactPage'
+import { Globals } from '@/globals/Globals'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -34,7 +35,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Games, Emails, TeamMembers, News],
-  globals: [LandingPage, GamesPage, AboutPage, CareersPage, MediaPage, CasesPage, ContactSection, ContactPage],
+  globals: [Globals, LandingPage, GamesPage, AboutPage, CareersPage, MediaPage, CasesPage, ContactSection, ContactPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

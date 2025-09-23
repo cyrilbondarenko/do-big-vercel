@@ -42,7 +42,6 @@ export const seedAboutPage = async (payload: BasePayload) => {
     { filename: 'portfolio (5).png', alt: 'Portfolio' },
     { filename: 'portfolio (6).png', alt: 'Portfolio' },
     { filename: 'portfolio (7).png', alt: 'Portfolio' },
-    { filename: 'portfolio (8).png', alt: 'Portfolio' },
   ]
   const portfolioMedia: UploadedMedia[] = await uploadMediaBatch(
     payload,
@@ -109,7 +108,7 @@ export const seedAboutPage = async (payload: BasePayload) => {
       investors: {
         title: 'Our Investors',
         items: portfolioMedia
-          .slice(0, 8)
+          .slice(0, 7)
           .map((m) => ({ href: 'https://www.google.com', image: m.id as number })),
       },
     },

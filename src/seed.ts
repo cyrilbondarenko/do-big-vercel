@@ -11,6 +11,7 @@ import { seedAboutPage } from './seed/sections/aboutPage'
 import { seedCareersPage } from './seed/sections/careersPage'
 import { seedMediaPage } from '@/seed/sections/mediaPage'
 import { seedContactPage } from '@/seed/sections/contactPage'
+import { seedGlobals } from '@/seed/sections/globals'
 
 const seed = async () => {
   const { default: config } = await import('./payload.config')
@@ -22,6 +23,7 @@ const seed = async () => {
     await clearCollections(payload)
 
     // Seed sections/pages
+    await seedGlobals(payload)
     await seedLandingPage(payload)
 
     // Collections
