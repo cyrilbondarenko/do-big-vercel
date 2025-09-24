@@ -11,7 +11,6 @@ import { Media } from './collections/Media'
 import { Games } from './collections/Games'
 import { Emails } from './collections/Emails'
 import { LandingPage } from './globals/LandingPage'
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { GamesPage } from '@/globals/GamesPage'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { TeamMembers } from '@/collections/Team'
@@ -23,6 +22,7 @@ import { News } from '@/collections/News'
 import { CasesPage } from '@/globals/CasesPage'
 import { ContactPage } from '@/globals/ContactPage'
 import { Globals } from '@/globals/Globals'
+import { s3Storage } from '@payloadcms/storage-s3'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,7 +35,17 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Games, Emails, TeamMembers, News],
-  globals: [Globals, LandingPage, GamesPage, AboutPage, CareersPage, MediaPage, CasesPage, ContactSection, ContactPage],
+  globals: [
+    Globals,
+    LandingPage,
+    GamesPage,
+    AboutPage,
+    CareersPage,
+    MediaPage,
+    CasesPage,
+    ContactSection,
+    ContactPage,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -49,12 +59,20 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
-    vercelBlobStorage({
-      enabled: !!process.env.BLOB_READ_WRITE_TOKEN,
+    s3Storage({
+      enabled: !!process.env.S3_BUCKET,
       collections: {
         media: true,
       },
-      token: process.env.BLOB_READ_WRITE_TOKEN,
+      bucket: process.env.S3_BUCKET!,
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+        },
+        region: process.env.S3_REGION!,
+        endpoint: process.env.S3_ENDPOINT!,
+      },
     }),
   ],
   email: nodemailerAdapter({
