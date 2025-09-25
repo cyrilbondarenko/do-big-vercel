@@ -23,6 +23,7 @@ import { CasesPage } from '@/globals/CasesPage'
 import { ContactPage } from '@/globals/ContactPage'
 import { Globals } from '@/globals/Globals'
 import { s3Storage } from '@payloadcms/storage-s3'
+import { PrivacyPolicyPage } from '@/globals/PrivacyPolicyPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -45,6 +46,7 @@ export default buildConfig({
     CasesPage,
     ContactSection,
     ContactPage,
+    PrivacyPolicyPage
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

@@ -12,14 +12,6 @@ export const Globals: GlobalConfig = {
       }
     },
     {
-      name: "logoDark",
-      type: "upload",
-      relationTo: "media",
-      admin: {
-        description: "Lorem ipsum"
-      }
-    },
-    {
       name: 'copyright',
       type: 'text',
       admin: {

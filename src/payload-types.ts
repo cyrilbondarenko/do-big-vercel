@@ -102,6 +102,7 @@ export interface Config {
     casesPage: CasesPage;
     contactSection: ContactSection;
     contactPage: ContactPage;
+    privacyPolicyPage: PrivacyPolicyPage;
   };
   globalsSelect: {
     globals: GlobalsSelect<false> | GlobalsSelect<true>;
@@ -113,6 +114,7 @@ export interface Config {
     casesPage: CasesPageSelect<false> | CasesPageSelect<true>;
     contactSection: ContactSectionSelect<false> | ContactSectionSelect<true>;
     contactPage: ContactPageSelect<false> | ContactPageSelect<true>;
+    privacyPolicyPage: PrivacyPolicyPageSelect<false> | PrivacyPolicyPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -527,10 +529,6 @@ export interface Global {
    * Lorem ipsum
    */
   logo?: (number | null) | Media;
-  /**
-   * Lorem ipsum
-   */
-  logoDark?: (number | null) | Media;
   /**
    * Lorem ipsum
    */
@@ -1028,11 +1026,45 @@ export interface ContactPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacyPolicyPage".
+ */
+export interface PrivacyPolicyPage {
+  id: number;
+  /**
+   * Add the title for the privacy policy page.
+   */
+  title?: string | null;
+  /**
+   * Add the title for the privacy policy page.
+   */
+  date?: string | null;
+  /**
+   * Add the privacy policy content here.
+   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "globals_select".
  */
 export interface GlobalsSelect<T extends boolean = true> {
   logo?: T;
-  logoDark?: T;
   copyright?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1325,6 +1357,18 @@ export interface ContactPageSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacyPolicyPage_select".
+ */
+export interface PrivacyPolicyPageSelect<T extends boolean = true> {
+  title?: T;
+  date?: T;
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

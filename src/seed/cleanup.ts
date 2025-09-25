@@ -10,6 +10,7 @@ type GlobalSlug =
   | 'mediaPage'
   | 'contactPage'
   | 'globals'
+  | 'privacyPolicyPage'
 
 type CollectionSlug = 'games' | 'news' | 'teamMembers' | 'media'
 
@@ -59,6 +60,7 @@ export const clearGlobals = async (payload: BasePayload) => {
     },
     { slug: 'mediaPage', data: { hero: {} } },
     { slug: 'contactPage', data: { hero: {} } },
+    { slug: 'privacyPolicyPage', data: { title: '', date: null, content: null } },
   ]
 
   for (const r of resets) {

@@ -12,6 +12,7 @@ import { seedCareersPage } from './seed/sections/careersPage'
 import { seedMediaPage } from '@/seed/sections/mediaPage'
 import { seedContactPage } from '@/seed/sections/contactPage'
 import { seedGlobals } from '@/seed/sections/globals'
+import { seedPrivacyPolicyPage } from '@/seed/sections/privacyPolicyPage'
 
 const seed = async () => {
   const { default: config } = await import('./payload.config')
@@ -39,6 +40,7 @@ const seed = async () => {
     await seedCareersPage(payload)
     await seedMediaPage(payload)
     await seedContactPage(payload)
+    await seedPrivacyPolicyPage(payload)
   } catch (error) {
     console.error(error)
     throw error
