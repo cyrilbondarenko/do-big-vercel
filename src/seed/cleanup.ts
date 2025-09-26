@@ -19,11 +19,23 @@ export const clearGlobals = async (payload: BasePayload) => {
     {
       slug: 'landingPage',
       data: {
-        hero: {},
-        portfolio: { items: [] },
-        hits: {},
-        cases: {},
-        buyout: { items: [] },
+        hero: {
+          title: '',
+          subtitle: '',
+          sessions: '',
+          players: '',
+          hours: '',
+        },
+        portfolio: {
+          title: '',
+          items: [],
+        },
+        hits: { title: '' },
+        cases: { title: '' },
+        buyout: {
+          title: '',
+          items: [],
+        },
       },
     },
     {
@@ -39,11 +51,11 @@ export const clearGlobals = async (payload: BasePayload) => {
       data: { ticker: { items: [] }, title: '', email: '', text: '', buttonText: '' },
     },
     { slug: 'gamesPage', data: { hero: {} } },
-    { slug: 'casesPage', data: { hero: { stats: [] } } },
+    { slug: 'casesPage', data: { hero: { title: '', stats: [] } } },
     {
       slug: 'aboutPage',
       data: {
-        hero: { stats: [] },
+        hero: { title: '', stats: [] },
         blocks: [],
         values: { title: '', items: [] },
         investors: { title: '', items: [] },
@@ -52,14 +64,20 @@ export const clearGlobals = async (payload: BasePayload) => {
     {
       slug: 'careersPage',
       data: {
-        hero: { stats: [] },
-        creators: {},
-        benefits: { items: [] },
-        positions: { positions: [] },
+        hero: { title: '', stats: [] },
+        creators: {
+          title: {
+            text: '',
+          },
+          subtitle: '',
+          text: '',
+        },
+        benefits: { title: '', subtitle: '', items: [] },
+        positions: { title: { title: '' }, positions: [] },
       },
     },
-    { slug: 'mediaPage', data: { hero: {} } },
-    { slug: 'contactPage', data: { hero: {} } },
+    { slug: 'mediaPage', data: { hero: {title: '', stats: []} } },
+    { slug: 'contactPage', data: { hero: {title: '', stats: []} } },
     { slug: 'privacyPolicyPage', data: { title: '', date: null, content: null } },
   ]
 
